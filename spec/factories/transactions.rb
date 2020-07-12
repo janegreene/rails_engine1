@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :transaction do
-    invoice_id { nil }
-    credit_card_number { "MyString" }
+    association :invoice
+    credit_card_number { "4147909988776655" }
     credit_card_expiration_date { "2020-07-11" }
-    result { "MyString" }
+    result { "denied" }
   end
 end
