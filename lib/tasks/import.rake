@@ -1,11 +1,14 @@
 require 'csv'
 
-desc "Import models from csv file"
+desc "Tear down and Import models from csv files"
 
 task :import => [:environment] do
-  # models = [Merchant, Items, Invoice, InvoiceItem, Customer, Transaction]
+  models = [Merchant, Items, Invoice, InvoiceItem, Customer, Transaction]
+  models.each do |model|
+    model.destroy_all
+  end
 
-  file = "app/data/customers.csv"
+  # file = "app/data/customers.csv"
   CSV.foreach(file) do |row|
     Customer.create({
       name:  row[0],
