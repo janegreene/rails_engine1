@@ -7,7 +7,6 @@ task :import => [:environment] do
   models.each do |model|
     model.destroy_all
     puts "#{model} objects destroyed"
-    ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
   end
 
   file = "./data/customers.csv"
@@ -69,5 +68,10 @@ task :import => [:environment] do
     total = model.all.count
     puts "#{total} #{model} objects created"
   end
+
+  ActiveRecord::Base.connection.tables.each do |t|
+    ActiveRecord::Base.connection.reset_pk_sequence!(t)
+  end
+
    puts "Seed from CSV Complete."
 end
