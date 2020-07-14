@@ -10,14 +10,43 @@ class Api::V1::ItemsController < ApplicationController
     render json: ItemSerializer.new(Item.find(params[:id]))
   end
 
+  # def create
+  #   id = Item.last.id if Item.last
+  #   id = 0 if Item.last.nil?
+  #   params = item_params.merge(id: id+1)
+  #   item = Item.create(params)
+  #   render json: ItemSerializer.new(item)
+    # item = Item.new(item_params)
+    # if item.save
+    #   render json: ItemSerializer.new(item)
+    # end
+    #need error handling
+    #still not passing spec harness
+    # item = Item.new(item_params)
+    # render json: ItemSerializer.new(item) if item.save
+  # end
+
+  # def destroy
+  #   render json: ItemSerializer.new(Item.destroy(params[:id]))
+  # end
   def create
-    render json: ItemSerializer.new(Item.create(item_params))
+    item = Item.new(item_params)
+    render json: ItemSerializer.new(item) if item.save
   end
 
+  def update
+    item = Item.update(params[:id], item_params)
+    render json: ItemSerializer.new(item)
+  end
+
+  def destroy
+    item = Item.destroy(params[:id])
+    render json: ItemSerializer.new(item)
+  end
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :unit_price, :merchant_id)
+    params.permit(:name, :description, :unit_price, :merchant_id)
   end
 
 end
