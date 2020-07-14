@@ -1,25 +1,9 @@
 require 'rails_helper'
 
 describe 'Relationships item merchant' do
-  # it 'can get items for a merchant' do
-  #   merchant = create(:merchant, id:99)
-  #   list = create_list(:item, 10, merchant_id: "#{merchant.id}")
-  #
-  #   get '/api/v1/merchants/99/items'
-  #   json = JSON.parse(response.body, symbolize_names: true)
-  #   expected_ids = list.map do |item|
-  #     item.id
-  #   end
-  #
-  #   item_ids = json[:data].map do |item|
-  #     item[:id].to_i
-  #   end
-  #   expect(item_ids.sort).to eq(expected_ids)
-  # end
-
   it 'can get merchant for an item' do
-    create(:item, id: 209, merchant_id: 11)
     create(:merchant, id: 11)
+    create(:item, id: 209, merchant_id: 11)
     get '/api/v1/items/209/merchant'
     json = JSON.parse(response.body, symbolize_names: true)
     expected_id = '11'
