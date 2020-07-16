@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         resources :merchants, only: [:show, :index, :create, :destroy, :update] do
           resources :items, only: [:index], controller: 'merchant_items'
         end
+        get '/revenue', to: "revenue#index"
     end
   end
 end
