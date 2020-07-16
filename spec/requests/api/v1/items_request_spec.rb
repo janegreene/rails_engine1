@@ -8,6 +8,7 @@ describe "Items API" do
     expect(response).to be_successful
 
     items = JSON.parse(response.body)
+    expect(response).to be_successful
     expect(items['data'].count).to eq(3)
     expect(items).to be_instance_of(Hash)
     expect(items['data']).to be_instance_of(Array)
@@ -42,6 +43,7 @@ describe "Items API" do
 
     json = JSON.parse(response.body, symbolize_names: true)
     new_item = json[:data]
+    expect(response).to be_successful
     expect(new_item[:attributes][:name]).to eq(name)
     expect(new_item[:attributes][:description]).to eq(description)
     expect(new_item[:attributes][:unit_price]).to eq(unit_price)
@@ -52,6 +54,7 @@ describe "Items API" do
     json = JSON.parse(response.body, symbolize_names: true)
 
     deleted_item = json[:data]
+    expect(response).to be_successful
     expect(deleted_item[:attributes][:name]).to eq(name)
     expect(deleted_item[:attributes][:description]).to eq(description)
     expect(deleted_item[:attributes][:unit_price]).to eq(unit_price)
@@ -78,6 +81,7 @@ describe "Items API" do
 
     json = JSON.parse(response.body, symbolize_names: true)
     item = json[:data]
+    expect(response).to be_successful
     expect(item[:attributes][:name]).to eq(name)
     expect(item[:attributes][:description]).to eq(description)
     expect(item[:attributes][:unit_price]).to eq(unit_price)

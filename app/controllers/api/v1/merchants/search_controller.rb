@@ -1,5 +1,3 @@
-# GET /api/v1/<resource>/find?<attribute>=<value
-#refactor if time one search controller sending in type to dry up code
 class Api::V1::Merchants::SearchController < ApplicationController
   def index
     merchants = Search.find_by_name(Merchant, params[:name])
