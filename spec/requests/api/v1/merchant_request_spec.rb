@@ -13,7 +13,7 @@ require 'rails_helper'
         json = JSON.parse(response.body, symbolize_names: true)
 
         expect(json[:data][:id]).to eq('42')
-
+        expect(response).to be_successful
         expected_attributes.each do |attribute, value|
           expect(json[:data][:attributes][attribute]).to eq(value)
         end
@@ -40,9 +40,6 @@ require 'rails_helper'
 
         # Create a merchant
         post '/api/v1/merchants', params: body
-        # response = conn('/api/v1/merchants').post do |request|
-        #   request.body = body
-        # end
 
         json = JSON.parse(response.body, symbolize_names: true)
 
@@ -55,6 +52,7 @@ require 'rails_helper'
         json = JSON.parse(response.body, symbolize_names: true)
 
         deleted_merchant = json[:data]
+        expect(response).to be_successful
         expect(deleted_merchant[:attributes][:name]).to eq(name)
       end
 
@@ -76,5 +74,6 @@ require 'rails_helper'
             name: 'Fahey-Stiedemann',
           }
           patch "/api/v1/merchants/99", params: original_body
+          expect(response).to be_successful
       end
     end

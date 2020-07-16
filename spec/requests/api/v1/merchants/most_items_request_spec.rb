@@ -34,15 +34,5 @@ describe 'business intelligence' do
 
     expect(json[:data].length).to eq(2)
     expect(response).to be_successful
-    # expect(json[:data][0][:attributes][:name]).to eq("Dicki-Bednar")
-    # expect(json[:data][0][:id]).to eq("14")
-    #
-    # expect(json[:data][1][:attributes][:name]).to eq("Bechtelar, Jones and Stokes")
-    # expect(json[:data][1][:id]).to eq("10")
-
-
-#     data = Merchant.joins(invoices:[:invoice_items, :transactions]).where("tr
-# ansactions.result='success'").group("merchants.name").select("merchants.name, sum(invoice_
-# items.quantity*invoice_items.unit_price) as revenue").order("revenue desc").limit(5)
   end
 end

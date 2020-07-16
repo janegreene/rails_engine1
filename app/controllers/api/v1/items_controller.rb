@@ -28,5 +28,4 @@ class Api::V1::ItemsController < ApplicationController
   def item_params
     params.permit(:name, :description, :unit_price, :merchant_id)
   end
-
 end

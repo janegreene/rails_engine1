@@ -14,14 +14,7 @@ describe 'Relationships merchant items' do
     item_ids = json[:data].map do |item|
       item[:id].to_i
     end
+    expect(response).to be_successful
     expect(item_ids.sort).to eq(expected_ids)
   end
-
-  # it 'can get merchant for an item' do
-  #   response = conn('/api/v1/items/209/merchant').get
-  #   json = JSON.parse(response.body, symbolize_names: true)
-  #   expected_id = '11'
-  #
-  #   expect(json[:data][:id]).to eq(expected_id)
-  # end
 end
