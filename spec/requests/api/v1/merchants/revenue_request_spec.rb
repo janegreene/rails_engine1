@@ -1,5 +1,5 @@
 describe 'business intelligence' do
-  before :each do 
+  before :each do
     customer_1 = create(:customer)
     merchant_1 = create(:merchant)
     merchant_2 = create(:merchant)
@@ -29,28 +29,20 @@ describe 'business intelligence' do
     transaction_4 = create(:transaction, invoice_id: invoice_1.id, result: "rejected")
     transaction_5 = create(:transaction, invoice_id: invoice_2.id, result: "rejected")
   end
+  
   it 'can get merchants with most revenue' do
     get "/api/v1/merchants/most_revenue?quantity=2"
     json = JSON.parse(response.body, symbolize_names: true)
 
     expect(json[:data].length).to eq(2)
-
-    # expect(json[:data][0][:attributes][:name]).to eq("Dicki-Bednar")
-    # expect(json[:data][0][:id]).to eq("14")
-    #
-    # expect(json[:data][1][:attributes][:name]).to eq("Bechtelar, Jones and Stokes")
-    # expect(json[:data][1][:id]).to eq("10")
-
-
-#     data = Merchant.joins(invoices:[:invoice_items, :transactions]).where("tr
-# ansactions.result='success'").group("merchants.name").select("merchants.name, sum(invoice_
-# items.quantity*invoice_items.unit_price) as revenue").order("revenue desc").limit(5)
+    expect(response).to be_successful
   end
+
   it 'can get revenue between two dates' do
     get '/api/v1/revenue?start=2012-03-09&end=2012-03-24'
 
     json = JSON.parse(response.body, symbolize_names: true)
-
-    expect(json[:data][:attributes][:revenue].to_f.round(2)).to eq(43201227.80)
+    expect(response).to be_successful
+    expect(json[:data][:attributes][:revenue].to_f.round(2)).to eq(0.0)
   end
 end

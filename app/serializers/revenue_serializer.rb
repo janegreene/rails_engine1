@@ -1,4 +1,3 @@
-class RevenueSerializer
-  include FastJsonapi::ObjectSerializer
+class RevenueSerializer < BaseSerializer
   attributes :revenue
 end

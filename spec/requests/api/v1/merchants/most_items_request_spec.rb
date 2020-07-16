@@ -33,7 +33,7 @@ describe 'business intelligence' do
     json = JSON.parse(response.body, symbolize_names: true)
 
     expect(json[:data].length).to eq(2)
-
+    expect(response).to be_successful
     # expect(json[:data][0][:attributes][:name]).to eq("Dicki-Bednar")
     # expect(json[:data][0][:id]).to eq("14")
     #
